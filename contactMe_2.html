@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+	<title>Contact Me!</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+	<meta name="description" content="Coding Dojo contact page.">
+</head>
+<body>
+	<h1 id="title">Add User</h1>
+	<form>
+		<label>First Name:<input type="text" name="first_name" placeholder="First Name" id="firstName"></label>
+		<label>Last Name:<input type="text" name="last_name" placeholder="Last Name" id="lastName"></label>
+		<label>Email Address:<input type="text" name="email" placeholder="Email Address" id="emailAddie"></label>
+		<label>Alternative Email:<input type="text" name="alt-email" placeholder="Alternative Email" id="altEmailAddie"></label>
+		<label>Contact #:<input type="text" name-"contact_#" placeholder="Contact #" id="contactNum"></label>
+		<label>Description<input type="text" id="descripText"></label>
+		<input type="button" value="Add User" id="submit">
+	</form>	
+	<div class="users"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var firstName,
+		lastName,
+		email,
+		altEmail,
+		contact,
+		description;
+
+	function fullName(firstName, lastName) {
+		return firstName + " " + lastName;
+	}
+
+	$('#submit').on('click', function() {
+		firstName = $('#firstName').val();
+		lastName  = $('#lastName').val();
+		email = $('#emailAddie').val();
+		altEmail = $('#altEmailAddie').val();
+		contact = $('#contactNum').val();
+		description = $('#descripText').val();
+
+		$('.users').append("<div class=\"newContact\"><h1>" + fullName(firstName,lastName) + "</h1><div class=\"info-toggle\"><p>Click » Description</p></div><div class=\"additional-user-info\"><p>" + email + "</p><p>" + altEmail + "</p><p>" + contact + "</p><p>" + description + "</p></div></div>");
+		$('form')[0].reset();
+	});
+
+
+	$(document).on('click', '.info-toggle', function(event) {
+		var target = $(event.currentTarget);
+		target.siblings('.additional-user-info').slideDown();
+	});
+
+	$(document).on('click', '.additional-user-info', function(event) {
+		$(this).slideUp();
+	});
+});
+</script>
+</body>
+<html>
